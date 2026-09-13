@@ -1,5 +1,8 @@
 # Mercury
 
+Submission for Multi-App AI Agent Hackathon, by LemmaAI, Comma Capital, Arga Labs and UserLens.
+By Yash Raja (shoutout to claude code too!)
+
 An AI purchasing agent for a small business that can't overspend.
 
 You email it what you need. It haggles with the supplier's AI, pays with Stripe, puts the delivery on your Google Calendar, logs the order in your Google Sheet, tells your team on Slack, and emails you the receipt. If the order is over the budget you set, it stops and asks you first.
@@ -11,11 +14,16 @@ Gmail  ->  supplier's agent  ->  the gate  ->  Stripe  ->  Google Calendar  ->  
 request     haggles              checks         pays        books delivery       logs the order     tells team   receipt
 ```
 
-## Try it in two minutes
+## A Quick Demo Video:
+
+
+## Try it yourself in two minutes
 
 You need Node 22 or newer. Nothing else. No accounts, no API keys, no internet. Every app has an offline mode and the whole demo runs on your laptop.
 
 ```bash
+git clone https://github.com/yashraja01/Multi-App-AI-Agent-for-Commerce.git
+cd Multi-App-AI-Agent-for-Commerce
 npm install
 npm run seed
 npm run dev
