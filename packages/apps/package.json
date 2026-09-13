@@ -1,0 +1,27 @@
+{
+  "name": "@mercury/apps",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@mercury/core": "*",
+    "imapflow": "^2.0.2",
+    "mailparser": "^3.9.26",
+    "nodemailer": "^10.0.9"
+  },
+  "devDependencies": {
+    "@types/mailparser": "^3.4.6",
+    "@types/nodemailer": "^8.0.1"
+  }
+}

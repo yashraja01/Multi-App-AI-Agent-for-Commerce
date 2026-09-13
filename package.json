@@ -1,0 +1,51 @@
+{
+  "name": "mercury",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Mercury - the merchant side of agentic commerce. A gate, and a witness.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "tsc --build && tsc --noEmit -p scripts/tsconfig.json && npm run build -w @mercury/web",
+    "typecheck": "tsc --build --force && tsc --noEmit -p scripts/tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "tsx scripts/verify-chain.ts",
+    "seed": "tsx scripts/seed.ts",
+    "demo": "tsx scripts/demo.ts",
+    "clean": "rimraf packages/*/dist apps/*/dist **/*.tsbuildinfo",
+    "dev": "npm run dev -w @mercury/web",
+    "start": "npm run start -w @mercury/web",
+    "mcp": "node apps/mcp/dist/index.js",
+    "mcp:smoke": "tsx scripts/mcp-smoke.ts",
+    "chaos": "tsx scripts/chaos.ts",
+    "conformance": "tsx scripts/conformance.ts",
+    "eval": "tsx scripts/eval.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "fast-check": "^3.23.2",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.7"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.120.0",
+    "@mercury/agent": "*",
+    "@mercury/apps": "*",
+    "@mercury/core": "*",
+    "@mercury/gate": "*",
+    "@mercury/ledger": "*",
+    "@mercury/rail": "*",
+    "@mercury/seed": "*",
+    "@mercury/store": "*",
+    "zod": "^3.24.1"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@mercury/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@mercury/agent": "*",
+    "@mercury/apps": "*",
+    "@mercury/core": "*",
+    "@mercury/gate": "*",
+    "@mercury/ledger": "*",
+    "@mercury/rail": "*",
+    "@mercury/store": "*",
+    "next": "^15.5.23",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "tailwindcss": "^4.3.3"
+  }
+}

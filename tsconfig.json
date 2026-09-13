@@ -1,0 +1,32 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/core"
+    },
+    {
+      "path": "./packages/seed"
+    },
+    {
+      "path": "./packages/ledger"
+    },
+    {
+      "path": "./packages/store"
+    },
+    {
+      "path": "./packages/gate"
+    },
+    {
+      "path": "./packages/rail"
+    },
+    {
+      "path": "./packages/apps"
+    },
+    {
+      "path": "./packages/agent"
+    },
+    {
+      "path": "./apps/mcp"
+    }
+  ]
+}

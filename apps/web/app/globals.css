@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+/*
+ * Mercury Mission Control.
+ *
+ * The visual idea is a ledger office at night, not a sci-fi console: ink-blue
+ * ground, aged-paper type, brass instrumentation, and the vermilion of a
+ * correction struck into a ledger. Every panel is ruled with hairlines at a
+ * fixed 28px rhythm, so a dark dashboard reads as ruled ledger paper inverted
+ * rather than as a generic card grid.
+ *
+ * Colour carries meaning and is never decorative:
+ *   brass      the gate, and anything Gate computed itself
+ *   vermilion  a denial, or a figure the agent got wrong
+ *   verdigris  money that actually settled
+ */
+
+@theme {
+  --color-ink: #0e1116;
+  --color-ink-raised: #151a21;
+  --color-ink-sunk: #0a0d11;
+  --color-rule: #232a33;
+  --color-rule-bright: #333c48;
+
+  --color-paper: #e8e2d4;
+  --color-paper-dim: #9c968a;
+  --color-paper-faint: #6a665e;
+
+  --color-brass: #c89b3c;
+  --color-brass-dim: #7d6227;
+  --color-vermilion: #d8452f;
+  --color-vermilion-dim: #7a2418;
+  --color-verdigris: #4e8c7d;
+  --color-verdigris-dim: #2b4f46;
+
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  /* TASA Orbiter Text sets body copy; Plex Sans is the fallback, not the plan. */
+  --font-sans: var(--font-body-face), var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+
+  /* TASA Orbiter Display, from `app/fonts/`. Reached only through this token. */
+  --font-display: var(--font-display-face), var(--font-body-face), sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+body {
+  font-family: var(--font-sans);
+  /* No stylistic-set overrides: "cv05"/"ss03" were Plex's, and Orbiter has its own. */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* The ruling. 28px is the line height of the data type, so entries sit on it. */
+.ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    color-mix(in srgb, var(--color-rule) 55%, transparent) 27px,
+    color-mix(in srgb, var(--color-rule) 55%, transparent) 28px
+  );
+}
+
+/* A panel: sunk into the board, ruled, with a brass hairline at the head. */
+/*
+ * A panel: outlined, not raised.
+ *
+ * Mission Control needs panels at all because it is a four-region grid and the
+ * regions would otherwise run together; the merchant console is one column with
+ * whitespace and needs none. But the *border* is what does that work. The
+ * raised fill and the brass wash on the head were decoration, and they were the
+ * whole reason the two screens read as different products rather than two seats
+ * at one. Both screens now sit on the same ground, and colour is left to mean
+ * something.
+ */
+.panel {
+  background: transparent;
+  border: 1px solid var(--color-rule);
+  border-radius: 2px;
+}
+
+.panel-head {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/*
+ * The display face. Headlines, the wordmark, and any figure that is the answer
+ * to the screen's question rather than one number among several.
+ *
+ * Never on a money column: `.figures` sets those in the mono, because tabular
+ * alignment is worth more than voice in a table.
+ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* The big one. Tabular, because it is still money. */
+.display-figure {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+}
+
+/*
+ * An instruction: a sentence with one number set into it.
+ *
+ * The merchant console is a list of standing orders rather than a form, and
+ * this is the number inside one. Underlined rather than boxed -- a box would
+ * make it a field again.
+ */
+.instruction-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--color-paper);
+  border-bottom: 1px solid var(--color-rule-bright);
+  padding-bottom: 1px;
+  background: none;
+  text-align: center;
+}
+
+.instruction-value:focus {
+  outline: none;
+  border-bottom-color: var(--color-brass);
+  color: var(--color-brass);
+}
+
+.instruction-value:disabled {
+  opacity: 0.45;
+}
+
+/* Small caps eyebrow, used for every panel and field label. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-paper-faint);
+}
+
+/* Tabular figures everywhere money or a count appears. */
+.figures {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.hash {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--color-paper-faint);
+  word-break: break-all;
+}
+
+/* Streamed events arrive one at a time; they should read as arriving. */
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.settle-in {
+  animation: settle-in 260ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+
+@keyframes verdict-flash {
+  0% {
+    box-shadow: inset 0 0 0 1px currentColor, 0 0 0 0 currentColor;
+  }
+  40% {
+    box-shadow: inset 0 0 0 1px currentColor, 0 0 22px -6px currentColor;
+  }
+  100% {
+    box-shadow: inset 0 0 0 1px currentColor, 0 0 0 0 transparent;
+  }
+}
+
+.verdict-flash {
+  animation: verdict-flash 900ms ease-out both;
+}
+
+@keyframes pulse-freeze {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.pulse-freeze {
+  animation: pulse-freeze 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .settle-in,
+  .verdict-flash,
+  .pulse-freeze {
+    animation: none;
+  }
+}
+
+/* Focus that survives a dark ground. */
+:where(button, a, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink-sunk);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border: 2px solid var(--color-ink-sunk);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-rule-bright);
+}
