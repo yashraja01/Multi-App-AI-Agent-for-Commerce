@@ -14,10 +14,6 @@ Gmail  ->  supplier's agent  ->  the gate  ->  Stripe  ->  Google Calendar  ->  
 request     haggles              checks         pays        books delivery       logs the order     tells team   receipt
 ```
 
-## A Quick Demo Video:
-
-[main/Demo Video.mp4](https://github.com/yashraja01/Multi-App-AI-Agent-for-Commerce/blob/main/Demo%20Video.mp4)
-
 ## Try it yourself in two minutes
 
 You need Node 22 or newer. Nothing else. No accounts, no API keys, no internet. Every app has an offline mode and the whole demo runs on your laptop.
